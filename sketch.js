@@ -32,15 +32,11 @@ let ghostX = 8;
 let ghostY = 5;
 let pacImg;
 let ghostImg;
-let foodImg;
-let startImg;
-let pacWinImg;
-let ghostWinImg;
 
 //loading all images
-function preload(){
-  ghostImg = loadImage("ghost.jpg");
-}
+// function preload(){
+//   ghostImg = loadImage("ghost.jpg");
+// }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -49,21 +45,19 @@ function setup() {
 }
 
 function startScreen() {
-  background(startImg);
   // probably text or a start key
 }
 
 function draw() {
-  if (state === "start"){
-    startScreen();
-  }
-  if (state === "main"){
-    showPac();
-    displayGrid(grid);
-    moveWhenSide();
-    foodchecker();
-    ghostWin(); 
-  }
+  // if (state === "start"){
+  //   startScreen();
+  // }
+  // if (state === "main"){
+  //   showPac();
+  displayGrid(grid);
+  // moveWhenSide();
+  // foodchecker();
+  //}
 }
 
 function showPac(){
@@ -88,27 +82,28 @@ function showPac(){
 //   } 
 // }
 
-// function displayGrid(grid) {
-//   let blockWidth = width / grid[0].length;
-//   let blockHeight = height / grid.length;
-//   for (let y = 0; y < grid.length; y++) {
-//     for (let x = 0; x < grid[y].length; x++) {
-//       if (grid[y][x] === 0) {
-//         fill("black");
-//         rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
-//         image(foodImg, x * blockWidth, y * blockHeight, blockWidth, blockHeight);
-//       }
-//       else if (grid[y][x] === B) {
-//         fill("blue");
-//         rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
-//       }
-//       else if(grid[y][x] === 1){
-//         fill("black");
-//         rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
-//       }
-//     }
-//   }
-// }
+function displayGrid(grid) {
+  let blockWidth = width / grid[0].length;
+  let blockHeight = height / grid.length;
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[y].length; x++) {
+      if (grid[y][x] === 0) {
+        fill("black");
+        rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
+        fill("white");
+        rect(x, y, 5, 5);
+      }
+      else if (grid[y][x] === B) {
+        fill("blue");
+        rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
+      }
+      else if(grid[y][x] === 1){
+        fill("black");
+        rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
+      }
+    }
+  }
+}
 
 
 // function keyPressed(){
