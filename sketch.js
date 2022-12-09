@@ -19,19 +19,30 @@
 // }
 
 // defining variables
-let grid = "map.txt";
-let somePellet;
-let foodcounter;
+let grid = [
+  [B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B],
+  [B, 0, 0, 0, 0, B, 0, 0, 0, 0, 0, 0, 0, 0, B, 0, 0, 0, 0, B],
+  [B, 0, B, B, 0, B, 0, B, B, B, B, B, B, 0, B, 0, B, B, 0, B],
+  [B, 0, B, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, B, 0, B],
+  [B, 0, B, 0, B, B, 0, B, B, 1, 1, B, B, 0, B, B, 0, B, 0, B],
+  [0, 0, 0, 0, 0, 0, 0, B, 1, 1, 1, 1, B, 0, 0, 0, 0, 0, 0, 0],
+  [B, 0, B, 0, B, B, 0, B, B, B, B, B, B, 0, B, B, 0, B, 0, B],
+  [B, 0, B, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, B, 0, B],
+  [B, 0, B, B, 0, B, 0, B, B, B, B, B, B, 0, B, 0, B, B, 0, B],
+  [B, 0, 0, 0, 0, B, 0, 0, 0, 0, 0, 0, 0, 0, B, 0, 0, 0, 0, B],
+  [B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B]];
+// let somePellet;
+// let foodcounter;
 let B = 2;
-let state = "start";
+// let state = "start";
 let blockWidth;
 let blockHeight;
-let pacX = 9;
-let pacY = 7;
-let ghostX = 8;
-let ghostY = 5;
-let pacImg;
-let ghostImg;
+// let pacX = 9;
+// let pacY = 7;
+// let ghostX = 8;
+// let ghostY = 5;
+// let pacImg;
+// let ghostImg;
 
 //loading all images
 // function preload(){
@@ -40,6 +51,7 @@ let ghostImg;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  background(220);
   // grid[pacY][pacX];
   // grid[ghostY][ghostX] = G;
 }
