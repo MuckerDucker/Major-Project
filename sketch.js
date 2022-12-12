@@ -19,6 +19,8 @@
 // }
 
 // defining variables
+let B = 2;
+
 let grid = [
   [B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B],
   [B, 0, 0, 0, 0, B, 0, 0, 0, 0, 0, 0, 0, 0, B, 0, 0, 0, 0, B],
@@ -33,12 +35,11 @@ let grid = [
   [B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B]];
 // let somePellet;
 // let foodcounter;
-let B = 2;
 // let state = "start";
 let blockWidth;
 let blockHeight;
-// let pacX = 9;
-// let pacY = 7;
+let pacX = 9;
+let pacY = 7;
 // let ghostX = 8;
 // let ghostY = 5;
 // let pacImg;
@@ -67,15 +68,11 @@ function draw() {
   // if (state === "main"){
   //   showPac();
   displayGrid(grid);
+  showPac();
   // moveWhenSide();
   // foodchecker();
   //}
 }
-
-// function showPac(){
-//   circle(pacY, pacX, 20);
-//   fill("yellow");
-// }
 
 
 
@@ -95,8 +92,8 @@ function draw() {
 // }
 
 function displayGrid(grid) {
-  let blockWidth = width / grid[0].length;
-  let blockHeight = height / grid.length;
+  blockWidth = width / grid[0].length;
+  blockHeight = height / grid.length;
   for (let y = 0; y < grid.length; y++) {
     for (let x = 0; x < grid[y].length; x++) {
       if (grid[y][x] === 0) {
@@ -117,120 +114,68 @@ function displayGrid(grid) {
   }
 }
 
+function showPac(){
+  fill("yellow");
+  circle(blockHeight * pacX, blockWidth * pacY, 20);
+}
 
-// function keyPressed(){
-//   // initiating main screen
-//   if (state === "start" && keyCode === 32){
-//     state = "main";
-//   }
-//   // Pac movement
-//   if (keyCode === UP_ARROW) {
-//     if (grid[pacY-1][pacX] !== B){
-//       //sets spot to black(eats food if it exists)
-//       grid[pacY][pacX] = 1;
+function keyPressed(){
+  // initiating main screen
+  // if (state === "start" && keyCode === 32){
+  //   state = "main";
+  // }
+  // Pac movement
+  if (keyCode === UP_ARROW) {
+    if (grid[pacY-1][pacX] !== B){
+      //sets spot to black(eats food if it exists)
+      grid[pacY][pacX] = 1;
       
-//       //move
-//       pacY--;
+      //move
+      pacY--;
+    }
+  }
 
-//       //changes pacs location
-//       grid[pacY][pacX] = M;
-//     }
-//   }
-
-//   if (keyCode === DOWN_ARROW) {
-//     if (grid[pacY+1][pacX] !== B) {
-//       //setting trail to black
-//       grid[pacY][pacX] = 1;
+  if (keyCode === DOWN_ARROW) {
+    if (grid[pacY+1][pacX] !== B) {
+      //setting trail to black
+      grid[pacY][pacX] = 1;
       
-//       //move
-//       pacY++;
+      //move
+      pacY++;
 
-//       //changes pacs location
-//       grid[pacY][pacX] = M;
-//     }
-//   }
+      //changes pacs location
+      grid[pacY][pacX] = M;
+    }
+  }
 
-//   if (keyCode === RIGHT_ARROW) {
-//     if (grid[pacY][pacX+1] !== B) {
-//       //setting trail to black
-//       grid[pacY][pacX] = 1;
+  if (keyCode === RIGHT_ARROW) {
+    if (grid[pacY][pacX+1] !== B) {
+      //setting trail to black
+      grid[pacY][pacX] = 1;
       
-//       //move
-//       pacX++;
+      //move
+      pacX++;
 
-//       //changes pacs location
-//       grid[pacY][pacX] = M;
-//     }
-//   }
+      //changes pacs location
+      grid[pacY][pacX] = M;
+    }
+  }
 
-//   if (keyCode === LEFT_ARROW) {
-//     if (grid[pacY][pacX-1] !== B) {
-//       //setting trail to black
-//       grid[pacY][pacX] = 1;
+  if (keyCode === LEFT_ARROW) {
+    if (grid[pacY][pacX-1] !== B) {
+      //setting trail to black
+      grid[pacY][pacX] = 1;
       
-//       //move
-//       pacX-- ;
+      //move
+      pacX-- ;
 
-//       //changes pacs location
-//       grid[pacY][pacX] = M;
-//     }
-//   }
-  
-//   if (keyCode === 83) {
-//     if (grid[ghostY+1][ghostX] !== B){
-//       // ensuring the ghost leaves no trail
-//       if(grid[ghostY+1][ghostX] === 1){
-//         grid[ghostY][ghostX] = 1;
-//       }
-//       if(grid[ghostY+1][ghostX] === 0){
-//         grid[ghostY][ghostX] = 0;
-//       }
-//       //move
-//       ghostY++;
-  
-//       //changes ghost's location
-//       grid[ghostY][ghostX] = G;
-//     }
-//   }
-  
-//   if (keyCode === 68) {
-//     if (grid[ghostY][ghostX + 1] !== B){
-//       // ensuring the ghost leaves no trail
-//       if(grid[ghostY][ghostX + 1] === 1){
-//         grid[ghostY][ghostX] = 1;
-//       }
-//       if(grid[ghostY][ghostX + 1] === 0){
-//         grid[ghostY][ghostX] = 0;
-//       }
-        
-//       //move
-//       ghostX++;
-  
-//       //changes ghost's location
-//       grid[ghostY][ghostX] = G;
-//     }
-//   }
-  
-//   if (keyCode === 65) {
-//     if (grid[ghostY][ghostX - 1] !== B){
-//       // ensuring the ghost leaves no trail
-//       if(grid[ghostY][ghostX - 1] === 1){
-//         grid[ghostY][ghostX] = 1;
-//       }
-//       if(grid[ghostY][ghostX - 1] === 0){
-//         grid[ghostY][ghostX] = 0;
-//       }
-        
-//       //move
-//       ghostX-- ;
-  
-//       //changes ghost's location
-//       grid[ghostY][ghostX] = G;
-//     }
-//   }
-// }
+      //changes pacs location
+      grid[pacY][pacX] = M;
+    }
+  }
+}
 
-// //Code for Final Project
+// // Moves Pac to the other side when he takes the path
 // function moveWhenSide(){
 //   if (grid[21][6] && keyCode === RIGHT_ARROW){
 //     pacX = 0;
