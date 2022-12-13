@@ -33,24 +33,65 @@ let grid = [
   [B, 0, B, B, 0, B, 0, B, B, B, B, B, B, 0, B, 0, B, B, 0, B],
   [B, 0, 0, 0, 0, B, 0, 0, 0, 0, 0, 0, 0, 0, B, 0, 0, 0, 0, B],
   [B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B]];
-
+// let somePellet;
+// let foodcounter;
+// let state = "start";
 let blockWidth;
 let blockHeight;
+let pacX = 9;
+let pacY = 7;
 let pacD = 60;
-let pacX;
-let pacY;
+// let ghostX = 8;
+// let ghostY = 5;
+// let pacImg;
+// let ghostImg;
+
+//loading all images
+// function preload(){
+//   ghostImg = loadImage("ghost.jpg");
+// }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  pacX = windowWidth/2;
-  pacY = windowHeight/2;
+  background(220);
+  // grid[pacY][pacX];
+  // grid[ghostY][ghostX] = G;
 }
 
+// function startScreen() {
+//   // probably text or a start key
+// }
+
 function draw() {
+  // if (state === "start"){
+  //   startScreen();
+  // }
+  // if (state === "main"){
+  //   showPac();
   displayGrid(grid);
-  move();
   showPac();
+  move();
+  // moveWhenSide();
+  // foodchecker();
+  //}
 }
+
+
+
+// // Checking how much food is left // include power pellets
+// function foodchecker(){
+//   foodcounter = 0;
+//   for (let y = 0; y < grid.length; y++) {
+//     for (let x = 0; x < grid[y].length; x++) {
+//       if (grid[y][x] === 0){
+//         foodcounter++;        
+//       }
+//     }
+//   }
+//   if (foodcounter === 0){
+//     state = "level_two";
+//   } 
+// }
 
 function displayGrid(grid) {
   blockWidth = width / grid[0].length;
@@ -75,34 +116,57 @@ function displayGrid(grid) {
   }
 }
 
-function move(){
-  if (keyCode === UP_ARROW) {  
-    //move
-      pacY--;
-    }
-
-    else if (keyCode === DOWN_ARROW) {
-      pacY++;
-  }
-
-    else if (keyCode === RIGHT_ARROW) {
-    //move
-      pacX++;
-
-  }
-
-    else if (keyCode === LEFT_ARROW) {
-      pacX-- ;
-
-    }
-  }
-
 function showPac(){
   fill("yellow");
-  circle(pacX, pacY, pacD);
+  circle((blockHeight + pacD/8) * pacX, (blockWidth * pacY), pacD);
 }
 
+function move(){
+  if (keyPressed){
+  // initiating main screen
+  // if (state === "start" && keyCode === 32){
+  //   state = "main";
+  // }
+  // Pac movement
+    if (keyCode === UP_ARROW) {
+      // if (grid[pacY-1][pacX] !== B){
+      //   //sets spot to black(eats food if it exists)
+      //   grid[pacY][pacX] = 1;
+        
+        //move
+        pacY--;
+      }
 
+    else if (keyCode === DOWN_ARROW) {
+      // if (grid[pacY+1][pacX] !== B) {
+      //   //setting trail to black
+      //   grid[pacY][pacX] = 1;
+        
+        //move
+        pacY++;
+    }
+
+    else if (keyCode === RIGHT_ARROW) {
+      // if (grid[pacY][pacX+1] !== B) {
+      //   //setting trail to black
+      //   grid[pacY][pacX] = 1;
+        
+        //move
+        pacX++;
+      
+    }
+
+    else if (keyCode === LEFT_ARROW) {
+      // if (grid[pacY][pacX-1] !== B) {
+      //   //setting trail to black
+      //   grid[pacY][pacX] = 1;
+        
+        //move
+        pacX-- ;
+      
+    }
+  }
+}
 
 // // Moves Pac to the other side when he takes the path
 // function moveWhenSide(){
