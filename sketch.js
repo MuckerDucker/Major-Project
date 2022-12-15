@@ -78,24 +78,24 @@ function displayGrid(grid) {
 function move(){
   if (keyCode === UP_ARROW) {  
     //move
-      pacY--;
-    }
-
-    else if (keyCode === DOWN_ARROW) {
-      pacY++;
+    pacY--;
   }
 
-    else if (keyCode === RIGHT_ARROW) {
+  else if (keyCode === DOWN_ARROW) {
+    pacY++;
+  }
+
+  else if (keyCode === RIGHT_ARROW) {
     //move
-      pacX++;
+    pacX++;
 
   }
 
-    else if (keyCode === LEFT_ARROW) {
-      pacX-- ;
+  else if (keyCode === LEFT_ARROW) {
+    pacX-- ;
 
-    }
   }
+}
 
 function showPac(){
   fill("yellow");
