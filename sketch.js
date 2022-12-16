@@ -50,6 +50,7 @@ function draw() {
   displayGrid(grid);
   move();
   showPac();
+  moveWhenSide();
 }
 
 function displayGrid(grid) {
@@ -78,21 +79,21 @@ function displayGrid(grid) {
 function move(){
   if (keyCode === UP_ARROW) {  
     //move
-    pacY--;
+    pacY-= 3;
   }
 
   else if (keyCode === DOWN_ARROW) {
-    pacY++;
+    pacY+= 3;
   }
 
   else if (keyCode === RIGHT_ARROW) {
     //move
-    pacX++;
+    pacX+=3;
 
   }
 
   else if (keyCode === LEFT_ARROW) {
-    pacX-- ;
+    pacX-=3 ;
 
   }
 }
@@ -104,17 +105,16 @@ function showPac(){
 
 
 
-// // Moves Pac to the other side when he takes the path
-// function moveWhenSide(){
-//   if (grid[21][6] && keyCode === RIGHT_ARROW){
-//     pacX = 0;
-//     grid[pacY][pacX] = M;
-//   }
-//   if (grid[0][6] && keyCode === LEFT_ARROW){
-//     pacX = 21;
-//     grid[pacY][pacX] = M;
-//   }
-// }
+// Moves Pac to the other side when he takes the path
+function moveWhenSide(){
+  // if (pacX >  && keyCode === RIGHT_ARROW){
+  //   pacX = 0;
+  //   grid[pacY][pacX] = M;
+  // }
+  if (pacX < 1 && keyCode === LEFT_ARROW){
+    pacX = 21 * blockWidth;
+  }
+}
 
 // // checking if the ghost won
 // function ghostWin(){
