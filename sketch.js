@@ -107,11 +107,11 @@ function showPac(){
 
 // Moves Pac to the other side when he takes the path
 function moveWhenSide(){
-  // if (pacX >  && keyCode === RIGHT_ARROW){
-  //   pacX = 0;
-  //   grid[pacY][pacX] = M;
-  // }
-  if (pacX < 1 && keyCode === LEFT_ARROW){
+  if (pacX > blockWidth * 20 && keyCode === RIGHT_ARROW){
+    pacX = 0;
+
+  }
+  if (pacX < 3 && keyCode === LEFT_ARROW){
     pacX = 21 * blockWidth;
   }
 }
