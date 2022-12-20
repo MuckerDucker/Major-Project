@@ -77,21 +77,21 @@ function displayGrid(grid) {
 }
 
 function move(){
-  if (keyCode === UP_ARROW) {  
-    //move
+  // checking if pac is going to run into a wall
+  if (keyCode === UP_ARROW && pacX !== B) {  
+    // move up
     pacY-= 3;
   }
-
+  // checking if pac is going to run into a wall
   else if (keyCode === DOWN_ARROW) {
     pacY+= 3;
   }
-
+  // checking if pac is going to run into a wall
   else if (keyCode === RIGHT_ARROW) {
     //move
     pacX+=3;
-
   }
-
+  // checking if pac is going to run into a wall
   else if (keyCode === LEFT_ARROW) {
     pacX-=3 ;
 
@@ -103,15 +103,13 @@ function showPac(){
   circle(pacX, pacY, pacD);
 }
 
-
-
 // Moves Pac to the other side when he takes the path
 function moveWhenSide(){
   if (pacX > blockWidth * 20 && keyCode === RIGHT_ARROW){
     pacX = 0;
 
   }
-  if (pacX < 3 && keyCode === LEFT_ARROW){
+  if (pacX < 1 && keyCode === LEFT_ARROW){
     pacX = 21 * blockWidth;
   }
 }
