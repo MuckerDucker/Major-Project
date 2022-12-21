@@ -103,6 +103,7 @@ function showPac(){
   circle(pacX, pacY, pacD);
 }
 
+
 // Moves Pac to the other side when he takes the path
 function moveWhenSide(){
   if (pacX > blockWidth * 20 && keyCode === RIGHT_ARROW){
