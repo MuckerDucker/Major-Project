@@ -36,7 +36,7 @@ let grid = [
 
 let blockWidth;
 let blockHeight;
-let pacD = 60;
+let pacD;
 let pacX;
 let pacY;
 
@@ -44,6 +44,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   pacX = windowWidth/2;
   pacY = windowHeight/2;
+  pacD = windowHeight/14;
 }
 
 function draw() {
@@ -77,25 +78,34 @@ function displayGrid(grid) {
 }
 
 function move(){
+  let nextX = pacX;
+  let nextY = pacY;
+
   // checking if pac is going to run into a wall
-  if (keyCode === UP_ARROW && pacX !== B) {  
+ if (keyCode === UP_ARROW && pacX !== 0) {  
+    if(pacY - 3 !== B)
     // move up
-    pacY-= 3;
+    nextY-= 3;
   }
   // checking if pac is going to run into a wall
   else if (keyCode === DOWN_ARROW) {
-    pacY+= 3;
+    nextY+= 3;
   }
   // checking if pac is going to run into a wall
   else if (keyCode === RIGHT_ARROW) {
     //move
-    pacX+=3;
+    nextX+=3;
   }
   // checking if pac is going to run into a wall
   else if (keyCode === LEFT_ARROW) {
-    pacX-=3 ;
-
+    nextX-=3 ;
   }
+
+  if (grid[nextY][nextX] === B){
+    pacX = nextX;
+    pacY = nextY;
+  }
+  
 }
 
 function showPac(){
@@ -111,7 +121,7 @@ function moveWhenSide(){
 
   }
   if (pacX < 1 && keyCode === LEFT_ARROW){
-    pacX = 21 * blockWidth;
+    pacX = width;
   }
 }
 
