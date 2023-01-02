@@ -5,18 +5,23 @@
 // used to code ghost movement https://www.todayifoundout.com/index.php/2015/10/ghosts-pac-man-work/#:~:text=Although%20the%20ghosts%20can%20sometimes,turn%20and%20then%20continue%20moving.
   
 // class definition
-// class Pellet {
-//   constructor(x, y, eaten){
-//     this.x = x;
-//     this.y = y;
-//     this.eaten = eaten;     
-//   }
+class Pellet {
+  constructor(x, y, eaten){
+    this.x = x;
+    this.y = y;
+    this.side = 5;
+    this.eaten = false; 
+  }
 
-//   display(){
-//     circle(this.x, this.y, 6);
-//     fill("white");
-//   }
-// }
+  display(){
+    fill("white");
+    rect(this.x, this.y, this.side);
+  }
+
+  isEaten(){
+    return this.eaten = true;
+  }
+}
 
 // defining variables
 let B = 2;
@@ -39,6 +44,7 @@ let blockHeight;
 let pacD;
 let pacX;
 let pacY;
+let pellets = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -52,6 +58,9 @@ function draw() {
   move();
   showPac();
   moveWhenSide();
+  for (let pellet of pellets){
+    somePellet.display();
+  }
 }
 
 function displayGrid(grid) {
@@ -82,8 +91,7 @@ function move(){
   let nextY = pacY;
 
   // checking if pac is going to run into a wall
- if (keyCode === UP_ARROW && pacX !== 0) {  
-    if(pacY - 3 !== B)
+ if (keyCode === UP_ARROW ) {  
     // move up
     nextY-= 3;
   }
@@ -101,12 +109,15 @@ function move(){
     nextX-=3 ;
   }
 
-  if (grid[nextY][nextX] === B){
+  let nextGridY = Math.floor(nextY/blockHeight);
+  let nextGridX = Math.floor(nextX/blockWidth);
+
+  if (grid[nextGridY //- pacD/2][nextGridX //- pacD/2] !== B && grid[nextGridY //- pacD/2][nextGridX //+ pacD/2] !== B && grid[nextGridY //+ pacD/2][nextGridX //- pacD/2] !== B && grid[nextGridY //+ pacD/2][nextGridX //+ pacD/2] !== B){
     pacX = nextX;
     pacY = nextY;
   }
-  
 }
+
 
 function showPac(){
   fill("yellow");
