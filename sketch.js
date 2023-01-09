@@ -91,7 +91,7 @@ function move(){
   let nextY = pacY;
 
   // checking if pac is going to run into a wall
- if (keyCode === UP_ARROW ) {  
+  if (keyCode === UP_ARROW ) {  
     // move up
     nextY-= 3;
   }
@@ -112,7 +112,7 @@ function move(){
   let nextGridY = Math.floor(nextY/blockHeight);
   let nextGridX = Math.floor(nextX/blockWidth);
 
-  if (grid[nextGridY //- pacD/2][nextGridX //- pacD/2] !== B && grid[nextGridY //- pacD/2][nextGridX //+ pacD/2] !== B && grid[nextGridY //+ pacD/2][nextGridX //- pacD/2] !== B && grid[nextGridY //+ pacD/2][nextGridX //+ pacD/2] !== B){
+  if (grid[nextGridY][nextGridX] !== B + pacD/2 && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B){
     pacX = nextX;
     pacY = nextY;
   }
