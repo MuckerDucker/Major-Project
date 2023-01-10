@@ -45,6 +45,15 @@ let pacD;
 let pacX;
 let pacY;
 let pellets = [];
+let somePellet = new Pellet//(grid[]);
+let waka;
+let theme;
+
+function preload(){
+  soundFormats("mp3");
+  waka = loadSound("waka.mp3");
+  theme = loadSound("theme.mp3");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -54,6 +63,10 @@ function setup() {
 }
 
 function draw() {
+if (state === "main"){
+  theme.play();
+  if (minute)
+}
   displayGrid(grid);
   move();
   showPac();
@@ -112,12 +125,13 @@ function move(){
   let nextGridY = Math.floor(nextY/blockHeight);
   let nextGridX = Math.floor(nextX/blockWidth);
 
-  if (grid[nextGridY][nextGridX] !== B + pacD/2 && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B){
+  if (grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B){
     pacX = nextX;
     pacY = nextY;
   }
 }
 
+// insert     waka.play(); somewhere
 
 function showPac(){
   fill("yellow");
