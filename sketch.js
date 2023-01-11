@@ -48,6 +48,9 @@ let pellets = [];
 let somePellet = new Pellet//(grid[]);
 let waka;
 let theme;
+let state = "main";
+let buttonColour = 255;
+let button;
 
 function preload(){
   soundFormats("mp3");
@@ -59,18 +62,21 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   pacX = windowWidth/2;
   pacY = windowHeight/2;
-  pacD = windowHeight/14;
+  pacD = windowHeight/35 + windowWidth/40;
 }
 
 function draw() {
-if (state === "main"){
-  theme.play();
-  if (minute)
-}
-  displayGrid(grid);
-  move();
-  showPac();
-  moveWhenSide();
+  if (state === "main"){
+    displayGrid(grid);
+    showStart();
+    movePac();
+    showPac();
+    moveWhenSide();
+    
+  }
+  if (state === "end"){
+    theme.setLoop(false);
+  }
   for (let pellet of pellets){
     somePellet.display();
   }
@@ -99,7 +105,7 @@ function displayGrid(grid) {
   }
 }
 
-function move(){
+function movePac(){
   let nextX = pacX;
   let nextY = pacY;
 
@@ -129,6 +135,14 @@ function move(){
     pacX = nextX;
     pacY = nextY;
   }
+}
+
+function showStart(){
+  // text("start",windowWidth/2, windowHeight/2);
+  button = createButton("Start");
+  fill(buttonColour);
+  button.position(windowWidth/2, windowHeight/2);
+  button.mousePressed(theme.loop);
 }
 
 // insert     waka.play(); somewhere
