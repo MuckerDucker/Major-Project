@@ -5,23 +5,23 @@
 // used to code ghost movement https://www.todayifoundout.com/index.php/2015/10/ghosts-pac-man-work/#:~:text=Although%20the%20ghosts%20can%20sometimes,turn%20and%20then%20continue%20moving.
   
 // class definition
-class Pellet {
-  constructor(x, y, eaten){
-    this.x = x;
-    this.y = y;
-    this.side = 5;
-    this.eaten = false; 
-  }
+// class Pellet {
+//   constructor(x, y, eaten){
+//     this.x = x;
+//     this.y = y;
+//     this.side = 5;
+//     this.eaten = false; 
+//   }
 
-  display(){
-    fill("white");
-    rect(this.x, this.y, this.side);
-  }
+//   display(){
+//     fill("white");
+//     rect(this.x, this.y, this.side);
+//   }
 
-  isEaten(){
-    return this.eaten = true;
-  }
-}
+//   isEaten(){
+//     return this.eaten = true;
+//   }
+// }
 
 // defining variables
 let B = 2;
@@ -103,6 +103,10 @@ function displayGrid(grid) {
       }
     }
   }
+}
+
+function pellet(){
+  if (grid)
 }
 
 function movePac(){
