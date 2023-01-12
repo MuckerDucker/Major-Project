@@ -45,7 +45,7 @@ let pacD;
 let pacX;
 let pacY;
 let pellets = [];
-let somePellet = new Pellet//(grid[]);
+// let somePellet = new Pellet//(grid[]);
 let waka;
 let theme;
 let state = "main";
@@ -77,9 +77,9 @@ function draw() {
   if (state === "end"){
     theme.setLoop(false);
   }
-  for (let pellet of pellets){
-    somePellet.display();
-  }
+  // for (let pellet of pellets){
+  //   somePellet.display();
+  // }
 }
 
 function displayGrid(grid) {
@@ -91,7 +91,7 @@ function displayGrid(grid) {
         fill("black");
         rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
         fill("white");
-        rect(x, y, 5, 5);
+        rect(blockWidth, blockWidth, 10, 10);
       }
       else if (grid[y][x] === B) {
         fill("blue");
@@ -106,7 +106,9 @@ function displayGrid(grid) {
 }
 
 function pellet(){
-  if (grid)
+  if (grid[pacX][pacY] === 0){
+    let che = 9;
+  }
 }
 
 function movePac(){
