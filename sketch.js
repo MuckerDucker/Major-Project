@@ -137,7 +137,7 @@ function movePac(){
   let nextGridY = Math.floor(nextY/blockHeight);
   let nextGridX = Math.floor(nextX/blockWidth);
 
-  if (grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B){
+  if (grid[nextGridY][nextGridX] !== B + pacD/2 && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B){
     pacX = nextX;
     pacY = nextY;
   }
@@ -175,4 +175,19 @@ function moveWhenSide(){
 //   if(ghostX === pacX && ghostY === pacY){
 //     background(ghostWinImg);
 //   }
+// }
+
+// // Checking how much food is left // include power pellets
+// function foodchecker(){
+//   foodcounter = 0;
+//   for (let y = 0; y < grid.length; y++) {
+//     for (let x = 0; x < grid[y].length; x++) {
+//       if (grid[y][x] === 0){
+//         foodcounter++;        
+//       }
+//     }
+//   }
+//   if (foodcounter === 0){
+//     state = "level_two";
+//   } 
 // }
