@@ -9,7 +9,7 @@ class Pellet {
   constructor(x, y, eaten){
     this.x = x;
     this.y = y;
-    this.side = 5;
+    this.side = 7;
     this.eaten = false; 
   }
 
@@ -59,15 +59,17 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  pacX = windowWidth/2;
-  pacY = windowHeight/2 - 25;
+  blockWidth = width / grid[0].length;
+  blockHeight = height / grid.length;
+  pacX = windowWidth/2 - blockWidth;
+  pacY = windowHeight/2 + blockHeight * 1.5;
   pacD = windowHeight/35 + windowWidth/40;
 
   // placing a pellet in the place of every "0" on the map
   for ( let y = 0; y < grid.length;y++){
     for(let x = 0; x < grid[y].length; x++){
       if (grid[y][x] === 0){
-        let pellet = new Pellet(x * blockWidth, y * blockHeight);
+        let pellet = new Pellet(x * blockWidth + (blockWidth/2 - 1 ), y * blockHeight + (blockHeight/2 - 1), false);
         pellets.push(pellet);
       }
     }
@@ -91,8 +93,6 @@ function draw() {
 }
 
 function displayGrid(grid) {
-  blockWidth = width / grid[0].length;
-  blockHeight = height / grid.length;
   for (let y = 0; y < grid.length; y++) {
     for (let x = 0; x < grid[y].length; x++) {
       if (grid[y][x] === 0) {
@@ -146,7 +146,13 @@ function movePac(){
     pacX = nextX;
     pacY = nextY;
   }
-
+  for (let i = pellets.length - 1; i >= 0; i--){
+    let distance = dist(pacX, pacY, pellets[i].x, pellets[i].y)
+    if (distance < blockWidth || distance < blockHeight){
+      pellets[i].isEaten();
+      pellets.splice(i, 1)
+    }
+  }
 }
 
 // function showStart(){
@@ -162,7 +168,7 @@ function movePac(){
 function showPac(){
   ellipseMode(CORNER)
   fill("yellow");
-  ellipse(pacX, pacY, blockWidth, blockHeight);
+  ellipse(pacX + 5, pacY + 2.5, blockWidth - 10, blockHeight - 5);
 }
 
 
