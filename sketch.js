@@ -9,7 +9,7 @@ class Pellet {
   constructor(x, y, eaten){
     this.x = x;
     this.y = y;
-    this.side = 7;
+    this.side = 9;
     this.eaten = false; 
   }
 
@@ -98,8 +98,8 @@ function displayGrid(grid) {
       if (grid[y][x] === 0) {
         fill("black");
         rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
-        fill("white");
-        rect(blockWidth, blockWidth, 10, 10);
+        // fill("white");
+        // rect(blockWidth, blockWidth, 10, 10);
       }
       else if (grid[y][x] === B) {
         fill("blue");
@@ -117,40 +117,39 @@ function displayGrid(grid) {
 function movePac(){
   let nextX = pacX;
   let nextY = pacY;
-  let nextYY = pacY - blockHeight/2;
+  // let nextYY = pacY - blockHeight/2;
 
-  // checking if pac is going to run into a wall
+  // move up
   if (keyCode === UP_ARROW ) {  
-    // move up
     nextY-= 3;
   }
-  // checking if pac is going to run into a wall
+  // move down
   else if (keyCode === DOWN_ARROW) {
     nextY+= 3;
   }
-  // checking if pac is going to run into a wall
+  // move right
   else if (keyCode === RIGHT_ARROW) {
-    //move
-      nextX+=3;
+    nextX+=3;
   }
-  // checking if pac is going to run into a wall
+  // move left
   else if (keyCode === LEFT_ARROW) {
     nextX-=3 ;
   }
 
-  let nextGridYY = Math.floor(nextYY/blockHeight);
+  // let nextGridYY = Math.floor(nextYY/blockHeight);
   let nextGridY = Math.floor(nextY/blockHeight);
   let nextGridX = Math.floor(nextX/blockWidth);
   
-  if (grid[nextGridY][nextGridX + 1] !== B && grid[nextGridY][nextGridX] !== B && (grid[nextGridYY][nextGridX] !== B || grid[nextGridY][nextGridX])){
+  if (grid[nextGridY][nextGridX + 1] !== B && grid[nextGridY][nextGridX] !== B){
     pacX = nextX;
     pacY = nextY;
   }
   for (let i = pellets.length - 1; i >= 0; i--){
-    let distance = dist(pacX, pacY, pellets[i].x, pellets[i].y)
-    if (distance < blockWidth || distance < blockHeight){
+    let distance = dist(pacX, pacY, pellets[i].x, pellets[i].y);
+    // eslint-disable-next-line no-extra-parens
+    if ((distance < blockHeight/2 && distance < blockWidth/2) || (distance < blockHeight)){
       pellets[i].isEaten();
-      pellets.splice(i, 1)
+      pellets.splice(i, 1);
     }
   }
 }
@@ -166,7 +165,7 @@ function movePac(){
 // insert     waka.play(); somewhere
 
 function showPac(){
-  ellipseMode(CORNER)
+  ellipseMode(CORNER);
   fill("yellow");
   ellipse(pacX + 5, pacY + 2.5, blockWidth - 10, blockHeight - 5);
 }
