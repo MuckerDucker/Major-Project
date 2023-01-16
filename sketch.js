@@ -5,23 +5,23 @@
 // used to code ghost movement https://www.todayifoundout.com/index.php/2015/10/ghosts-pac-man-work/#:~:text=Although%20the%20ghosts%20can%20sometimes,turn%20and%20then%20continue%20moving.
   
 // class definition
-// class Pellet {
-//   constructor(x, y, eaten){
-//     this.x = x;
-//     this.y = y;
-//     this.side = 5;
-//     this.eaten = false; 
-//   }
+class Pellet {
+  constructor(x, y, eaten){
+    this.x = x;
+    this.y = y;
+    this.side = 5;
+    this.eaten = false; 
+  }
 
-//   display(){
-//     fill("white");
-//     rect(this.x, this.y, this.side);
-//   }
+  display(){
+    fill("white");
+    rect(this.x, this.y, this.side);
+  }
 
-//   isEaten(){
-//     return this.eaten = true;
-//   }
-// }
+  isEaten(){
+    return this.eaten = true;
+  }
+}
 
 // defining variables
 let B = 2;
@@ -45,7 +45,6 @@ let pacD;
 let pacX;
 let pacY;
 let pellets = [];
-// let somePellet = new Pellet//(grid[]);
 let waka;
 let theme;
 let state = "main";
@@ -61,25 +60,34 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
   pacX = windowWidth/2;
-  pacY = windowHeight/2;
+  pacY = windowHeight/2 - 25;
   pacD = windowHeight/35 + windowWidth/40;
+
+  // placing a pellet in the place of every "0" on the map
+  for ( let y = 0; y < grid.length;y++){
+    for(let x = 0; x < grid[y].length; x++){
+      if (grid[y][x] === 0){
+        let pellet = new Pellet(x * blockWidth, y * blockHeight);
+        pellets.push(pellet);
+      }
+    }
+  }  
 }
 
 function draw() {
   if (state === "main"){
     displayGrid(grid);
-    showStart();
+    // showStart();
     movePac();
     showPac();
     moveWhenSide();
-    
+    for (let pellet of pellets){
+      pellet.display();
+    }
   }
   if (state === "end"){
     theme.setLoop(false);
   }
-  // for (let pellet of pellets){
-  //   somePellet.display();
-  // }
 }
 
 function displayGrid(grid) {
@@ -105,15 +113,11 @@ function displayGrid(grid) {
   }
 }
 
-function pellet(){
-  if (grid[pacX][pacY] === 0){
-    let che = 9;
-  }
-}
 
 function movePac(){
   let nextX = pacX;
   let nextY = pacY;
+  let nextYY = pacY - blockHeight/2;
 
   // checking if pac is going to run into a wall
   if (keyCode === UP_ARROW ) {  
@@ -127,35 +131,38 @@ function movePac(){
   // checking if pac is going to run into a wall
   else if (keyCode === RIGHT_ARROW) {
     //move
-    nextX+=3;
+      nextX+=3;
   }
   // checking if pac is going to run into a wall
   else if (keyCode === LEFT_ARROW) {
     nextX-=3 ;
   }
 
+  let nextGridYY = Math.floor(nextYY/blockHeight);
   let nextGridY = Math.floor(nextY/blockHeight);
   let nextGridX = Math.floor(nextX/blockWidth);
-
-  if (grid[nextGridY][nextGridX] !== B + pacD/2 && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B && grid[nextGridY][nextGridX] !== B){
+  
+  if (grid[nextGridY][nextGridX + 1] !== B && grid[nextGridY][nextGridX] !== B && (grid[nextGridYY][nextGridX] !== B || grid[nextGridY][nextGridX])){
     pacX = nextX;
     pacY = nextY;
   }
+
 }
 
-function showStart(){
-  // text("start",windowWidth/2, windowHeight/2);
-  button = createButton("Start");
-  fill(buttonColour);
-  button.position(windowWidth/2, windowHeight/2);
-  button.mousePressed(theme.loop);
-}
+// function showStart(){
+//   // text("start",windowWidth/2, windowHeight/2);
+//   button = createButton("Start");
+//   fill(buttonColour);
+//   button.position(windowWidth/2, windowHeight/2);
+//   button.mousePressed(theme.loop);
+// }
 
 // insert     waka.play(); somewhere
 
 function showPac(){
+  ellipseMode(CORNER)
   fill("yellow");
-  circle(pacX, pacY, pacD);
+  ellipse(pacX, pacY, blockWidth, blockHeight);
 }
 
 
