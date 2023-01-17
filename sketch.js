@@ -23,6 +23,20 @@ class Pellet {
   }
 }
 
+class Ghost{
+  constructor(x, y, eaten){
+    this.x = x;
+    this.y = y;
+  }
+  blinky(){
+    //pathfinding code here maybe?
+  }
+
+}
+
+// pathfinding code
+// if (blinkyY ++ )
+
 // defining variables
 let B = 2;
 
@@ -63,7 +77,8 @@ function setup() {
   blockHeight = height / grid.length;
   pacX = windowWidth/2 - blockWidth;
   pacY = windowHeight/2 + blockHeight * 1.5;
-  pacD = windowHeight/35 + windowWidth/40;
+  pacD = 25;
+  // pacD = windowHeight/35 + windowWidth/40;
 
   // placing a pellet in the place of every "0" on the map
   for ( let y = 0; y < grid.length;y++){
@@ -82,7 +97,7 @@ function draw() {
     // showStart();
     movePac();
     showPac();
-    moveWhenSide();
+    // moveWhenSide();
     for (let pellet of pellets){
       pellet.display();
     }
@@ -98,8 +113,6 @@ function displayGrid(grid) {
       if (grid[y][x] === 0) {
         fill("black");
         rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
-        // fill("white");
-        // rect(blockWidth, blockWidth, 10, 10);
       }
       else if (grid[y][x] === B) {
         fill("blue");
@@ -113,45 +126,51 @@ function displayGrid(grid) {
   }
 }
 
-
 function movePac(){
   let nextX = pacX;
   let nextY = pacY;
-  // let nextYY = pacY - blockHeight/2;
+
+  let nextGridY = Math.floor(nextY/blockHeight);
+  let nextGridX = Math.floor(nextX/blockWidth);
 
   // move up
   if (keyCode === UP_ARROW ) {  
-    nextY-= 3;
+    if (grid[nextGridY][nextGridX] !== B){
+      pacY = nextY;
+      nextY-= 3;
+    }
   }
   // move down
   else if (keyCode === DOWN_ARROW) {
-    nextY+= 3;
+    if (grid[nextGridY + 1 ][nextGridX] !== B){
+      pacY = nextY;
+      nextY+= 3;
+    }
   }
   // move right
   else if (keyCode === RIGHT_ARROW) {
-    nextX+=3;
+    if (grid[nextGridY][nextGridX + 1] !== B){
+      pacX = nextX;
+      nextX+= 3;
+    }
   }
   // move left
   else if (keyCode === LEFT_ARROW) {
     nextX-=3 ;
   }
-
-  // let nextGridYY = Math.floor(nextYY/blockHeight);
-  let nextGridY = Math.floor(nextY/blockHeight);
-  let nextGridX = Math.floor(nextX/blockWidth);
   
-  if (grid[nextGridY][nextGridX + 1] !== B && grid[nextGridY][nextGridX] !== B){
-    pacX = nextX;
-    pacY = nextY;
-  }
-  for (let i = pellets.length - 1; i >= 0; i--){
-    let distance = dist(pacX, pacY, pellets[i].x, pellets[i].y);
-    // eslint-disable-next-line no-extra-parens
-    if ((distance < blockHeight/2 && distance < blockWidth/2) || (distance < blockHeight)){
-      pellets[i].isEaten();
-      pellets.splice(i, 1);
-    }
-  }
+  // if (grid[nextGridY][nextGridX] !== B && grid[nextGridY + 1 ][nextGridX] !== B){
+  //   pacX = nextX;
+  //   pacY = nextY;
+  // }
+  // for (let i = pellets.length - 1; i >= 0; i--){
+  //   let distance = dist(pacX, pacY, pellets[i].x, pellets[i].y);
+  //   // eslint-disable-next-line no-extra-parens
+  //   if ((distance < blockHeight/2 && distance < blockWidth/2)){
+  //     pellets[i].isEaten();
+  //     pellets.splice(i, 1);
+  //   }
+  // }
 }
 
 // function showStart(){
@@ -167,20 +186,21 @@ function movePac(){
 function showPac(){
   ellipseMode(CORNER);
   fill("yellow");
-  ellipse(pacX + 5, pacY + 2.5, blockWidth - 10, blockHeight - 5);
+  ellipse(pacX + 5, pacY + 2.5, blockWidth - 30, blockHeight - 30);
+  // ellipse(pacX + 5, pacY + 2.5, blockWidth - 10, blockHeight - 5);
 }
 
 
-// Moves Pac to the other side when he takes the path
-function moveWhenSide(){
-  if (pacX > blockWidth * 20 && keyCode === RIGHT_ARROW){
-    pacX = 0;
+// // Moves Pac to the other side when he takes the path
+// function moveWhenSide(){
+//   if (pacX > blockWidth * 20 && keyCode === RIGHT_ARROW){
+//     pacX = 0;
 
-  }
-  if (pacX < 1 && keyCode === LEFT_ARROW){
-    pacX = width;
-  }
-}
+//   }
+//   if (pacX < 1 && keyCode === LEFT_ARROW){
+//     pacX = width;
+//   }
+// }
 
 // // checking if the ghost won
 // function ghostWin(){
