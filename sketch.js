@@ -75,6 +75,7 @@ let botLeftCorner;
 let topLeftCorner;
 let topRightCorner;
 let botRightCorner;
+let tDownWall;
 
 function preload(){
   soundFormats("mp3");
@@ -275,8 +276,8 @@ function moveWhenSide(){
 // Checking how much food is left // include power pellets
 function foodchecker(){
   if(pellets.length === 0){
-    textSize(74)
-    fill("white")
-    text("you win")
+    textSize(74);
+    fill("white");
+    text("you win");
   }
 }
