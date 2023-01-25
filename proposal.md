@@ -4,14 +4,14 @@ I am going to recreate Pac-Man.
 
 ## Needs to Have List
 
-- Pac-man movement(WASD)
+- Pac-man movement(WASD) ✓
 - Ghost AI different enough for four ghosts(AI to chase and run from Pac-man)
 - Power-up pellets
 - Can advance levels when conditions are met
 - Different levels
 - Code sending back Ghosts after being eaten
 - Sound effects
-- Background music
+- Background music ✓
 
 ## Nice to Have List
 
